@@ -1,0 +1,23 @@
+{
+  "name": "pharmacy-pos",
+  "version": "1.0.0",
+  "description": "Pharmacy Point of Sale System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mssql": "^12.7.0",
+    "node-gyp-build": "4.8.4",
+    "prompt-sync": "4.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

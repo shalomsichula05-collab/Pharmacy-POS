@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Pharmacy POS
+    </title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="topbar">
+    <div>
+        <strong>
+            Pharmacy POS
+        </strong>
+    </div>
+    <div class="user-area">
+        <span id="pharmacistName"> Pharmacist </span>
+        <button id="logoutButton" class="logout-button"> Logout </button>
+    </div>
+</header>
+<div class="layout">
+    
+    <aside class="sidebar">
+        <button onclick="showSection('sales')"> New Sale </button>
+        <button onclick="showSection('customers')"> Customers </button>
+        <button onclick="showSection('prescriptions')"> Prescriptions </button>
+        <button onclick="showSection('inventory')"> Inventory </button>
+        <button onclick="showSection('expired')"> Expired Stock </button>
+        <button onclick="showSection('pharmacists')"> Pharmacists </button>
+    </aside>
+
+    <main class="content">
+        <section id="sales" class="section">
+            <div class="section-header">
+                <div>
+                    <h2> New Sale </h2>
+                    <p> Search products </p>
+                </div>
+            </div>
+            <div class="card">
+                <h3> Customer </h3>
+                <input
+                    id="customerSearch"
+                    placeholder="Search customer.">
+                <div
+                    id="customerResults"
+                    class="search-results">
+                </div>
+                <div
+                    id="selectedCustomer"
+                    class="selected-customer">
+                </div>
+            </div>
+
+            <div class="card">
+                <h3> Product Search </h3>
+                <input
+                    id="productSearch"
+                    placeholder="Product name">
+                <div
+                    id="productResults"
+                    class="search-results">
+                </div>
+
+            </div>
+            <div class="card">
+                <h3> Current Sale </h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    Product
+                                </th>
+                                <th>
+                                    Price
+                                </th>
+                                <th>
+                                    Quantity
+                                </th>
+                                <th>
+                                    Total
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="sale-footer">
+                    <div>
+                        <button onclick="pauseSale()"> Pause Sale </button>
+                        <button class="danger" onclick="cancelSale()"> Cancel Sale </button>
+                    </div>
+                    <div class="checkout">
+                        <div class="total">
+                            Total(ZMW):
+                            <strong id="saleTotal">
+                                0.00
+                            </strong>
+                        </div>
+                        <select
+                            id="paymentMethod">
+                            <option value="cash">
+                                Cash
+                            </option>
+                            <option value="card">
+                                Card
+                            </option>
+                            <option value="mobile_money">
+                                Mobile Money
+                            </option>
+                            <option value="insurance">
+                                Insurance
+                            </option>
+                        </select>
+                        <button class="success" onclick="completeSale()"> Complete Sale </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="customers" class="section hidden">
+            <h2> Customers </h2>
+            <div class="card">
+                <input
+                    id="customerLookup"
+                    placeholder="Search customer">
+                <button onclick="searchCustomers()"> Search </button>
+                <div
+                    id="customersList">
+                </div>
+            </div>
+        </section>
+        <section
+            id="prescriptions"
+            class="section hidden">
+            <h2> Prescriptions </h2>
+            <div class="card">
+                <p> Select a customer to view prescription history.</p>
+                <input
+                    id="prescriptionCustomerId"
+                    type="number"
+                    min="1"
+                    placeholder="Customer ID">
+
+                <button onclick="loadPrescriptionHistory()">
+                    View Prescriptions
+                </button>
+
+<div id="prescriptionList"></div>
+                <div
+                    id="prescriptionList">
+                </div>
+            </div>
+        </section>
+        <section
+            id="inventory"
+            class="section hidden">
+            <h2> Inventory </h2>
+            <div class="card">
+                <h3> Receive Stock </h3>
+                <form
+                    id="inventoryForm">
+                    <input
+                        id="inventoryProduct"
+                        type="number"
+                        placeholder="Product ID"
+                        required>
+                    <input
+                        id="batchNumber"
+                        placeholder="Batch number">
+                    <input
+                        id="quantity"
+                        type="number"
+                        min="1"
+                        placeholder="Quantity"
+                        required>
+                    <input
+                        id="expiryDate"
+                        type="date">
+                    <input
+                        id="costPrice"
+                        type="number"
+                        step="0.01"
+                        placeholder="Cost price">
+                    <input
+                        id="supplier"
+                        placeholder="Supplier">
+                    <button class="success"> Receive Stock </button>
+                </form>
+            </div>
+        </section>
+        <section
+            id="expired"
+            class="section hidden">
+            <h2> Expired Stock </h2>
+            <button onclick="loadExpiredStock()"> Refresh </button>
+            <div
+                id="expiredList">
+            </div>
+        </section>
+        <section
+            id="pharmacists"
+            class="section hidden">
+            <h2> Pharmacists </h2>
+
+            <div class="card">
+                <form id="pharmacistForm">
+                    <input
+                        id="pharmacistUsername"
+                        placeholder="Username"
+                        required>
+
+                    <input
+                        id="pharmacistPassword"
+                        type="password"
+                        placeholder="password"
+                        minlength="8"
+                        required>
+
+                    <input
+                        id="pharmacistFirstName"
+                        placeholder="First name"
+                        required>
+
+                    <input
+                        id="pharmacistLastName"
+                        placeholder="Last name"
+                        required>
+
+                    <select id="pharmacistRole" required>
+                        <option value="pharmacist">Pharmacist</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+
+                    <button class="success" type="submit">
+                        Add Pharmacist
+                    </button>
+                </form>
+
+                <p id="pharmacistMessage"></p>
+            </div>
+        </section>
+    </main>
+</div>
+<script src="/app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy POS - Login</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="login-page">
+    <div class="login-card">
+        <h1> Pharmacy POS</h1>
+        <p> Pharmacist Login </p>
+        <form id="loginForm">
+            <label> Username </label>
+            <input
+                id="Username"
+                type="text"
+                autocomplete="Username"
+                required>
+            <label> Password </label>
+            <input
+                id="Password"
+                type="password"
+                autocomplete="current-password"
+                required>
+            <button type="submit" class="primary-button"> Login </button>
+            <div id="loginMessage" class="message"> </div>
+        </form>
+    </div>
+    <script src="/login.js"></script>
+</body>
+</html>
